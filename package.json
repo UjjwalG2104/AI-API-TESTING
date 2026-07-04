@@ -1,0 +1,22 @@
+{
+  "name": "ai-api-tester",
+  "version": "1.0.0",
+  "type": "commonjs",
+  "scripts": {
+    "start": "node src/index.js",
+    "dev": "nodemon src/index.js",
+    "test": "jest"
+  },
+  "dependencies": {
+    "axios": "^1.11.0",
+    "chalk": "^4.1.2",
+    "commander": "^15.0.0",
+    "dotenv": "^17.2.1",
+    "fs-extra": "^11.3.0",
+    "ora": "^9.4.0"
+  },
+  "devDependencies": {
+    "jest": "^30.0.5",
+    "nodemon": "^3.1.10"
+  }
+}

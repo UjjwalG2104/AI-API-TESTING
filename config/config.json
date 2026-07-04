@@ -1,0 +1,21 @@
+{
+    "project": {
+        "name": "ExamPro",
+        "version": "1.0.0"
+    },
+
+    "server": {
+        "baseURL": "http://localhost:8080",
+        "swaggerURL": "http://localhost:8080/v3/api-docs",
+        "timeout": 5000
+    },
+
+    "authentication": {
+        "enabled": true,
+        "type": "JWT"
+    },
+
+    "reporting": {
+        "output": "./reports"
+    }
+}
