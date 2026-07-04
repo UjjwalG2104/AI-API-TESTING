@@ -1,6 +1,7 @@
-const logger = require("./core/logger");
+const logger = require("./core/Logger");
 const configManager = require("./core/ConfigManager");
 const swaggerScanner = require("./core/SwaggerScanner");
+const repository = require("./core/ApiRepository");
 
 (async () => {
 
@@ -14,31 +15,28 @@ const swaggerScanner = require("./core/SwaggerScanner");
             config.server.swaggerURL
         );
 
-        logger.success(
-            "Swagger Downloaded"
-        );
+        logger.success("Swagger Downloaded");
 
-        console.log(swagger.openapi);
+        const apis = swaggerScanner.discover(swagger);
+
+        repository.setApis(apis);
+        const testGenerator = require("./generators/TestGenerator");
+        const tests = testGenerator.generate(
+            repository.getAll()
+         );
+
+            logger.success(`${tests.length} Test Cases Generated`);
+            console.table(tests);
+        logger.success(`${repository.count()} APIs Loaded`);
+
+        console.table(repository.getAll());
 
     }
 
-    catch (err) {
+    catch(err){
 
-    logger.error("Application Error");
+        logger.error(err.message);
 
-    console.log("Message:", err.message);
-    console.log("Code:", err.code);
-
-    if (err.response) {
-        console.log("Status:", err.response.status);
-        console.log("Data:", err.response.data);
     }
 
-    if (err.request) {
-        console.log("No response received.");
-    }
-
-    console.log(err);
-
-}
 })();
